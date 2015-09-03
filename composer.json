@@ -1,0 +1,12 @@
+{
+    "name": "yamiko/cache-administration-bundle",
+    "description": "Defines a service and controller for clearing caches",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Parker",
+            "email": "rparker@yamiko.ninja"
+        }
+    ],
+    "require": {}
+}
