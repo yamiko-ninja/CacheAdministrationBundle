@@ -1,0 +1,3 @@
+yamiko_cache_administration_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: YamikoCacheAdministrationBundle:Default:index }
