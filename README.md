@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/yamiko-ninja/CacheAdministrationBundle.svg?branch=master)](https://travis-ci.org/yamiko-ninja/CacheAdministrationBundle)
+
 Installation
 ============
 
