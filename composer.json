@@ -1,12 +1,16 @@
 {
     "name": "yamiko/cache-administration-bundle",
-    "description": "Defines a service and controller for clearing caches",
+    "description": "Manage symfony caches",
     "license": "MIT",
     "authors": [
         {
-            "name": "Robert Parker",
+            "name": "Robert M. Parker",
             "email": "rparker@yamiko.ninja"
         }
     ],
-    "require": {}
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    }
 }
