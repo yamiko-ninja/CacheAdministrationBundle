@@ -14,10 +14,15 @@ matrix:
     - php: hhvm
 
 before_script:
+  - pyrus install pear/PHP_CodeSniffer
+  - phpenv rehash
   - composer self-update
   - composer install
+  - vendor/bin/phpcs --config-set installed_paths vendor/escapestudios/symfony2-coding-standard
 
-script: phpunit
+script:
+  - vendor/bin/phpcs --standard=Symfony2 --ignore=vendor/* ./
+  - phpunit
 
 notifications:
   email: friendsofsymfony-dev@googlegroups.com

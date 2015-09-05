@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
-
-    <php>
-        <server name="KERNEL_DIR" value="../../../app" />
-    </php>
-
+<phpunit
+        bootstrap="./Tests/bootstrap.php"
+        stopOnFailure="false"
+        convertErrorsToExceptions="true"
+        colors="true"
+        >
     <testsuites>
         <testsuite name="FOSUserBundle test suite">
             <directory suffix="Test.php">./Tests</directory>
