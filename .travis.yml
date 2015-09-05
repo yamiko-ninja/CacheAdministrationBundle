@@ -19,7 +19,7 @@ before_script:
   - vendor/bin/phpcs --config-set installed_paths vendor/escapestudios/symfony2-coding-standard
 
 script:
-  - vendor/bin/phpcs --standard=Symfony2 --ignore=vendor/* ./
+  - vendor/bin/phpcs --standard=Symfony2 --ignore=vendor/*,Tests/* ./
   - phpunit
 
 notifications:
