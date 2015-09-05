@@ -15,8 +15,8 @@ matrix:
 
 before_script:
   - composer self-update
-  - composer require escapestudios/symfony2-coding-standard:2.8
-  - composer require fabpot/php-cs-fixer:1.*
+  - composer require --dev escapestudios/symfony2-coding-standard:~2.0
+  - composer require fabpot/php-cs-fixer
   - composer install
   - vendor/bin/phpcs --config-set installed_paths vendor/escapestudios/symfony2-coding-standard
 
