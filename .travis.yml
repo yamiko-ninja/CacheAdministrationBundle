@@ -17,7 +17,7 @@ before_script:
   - composer self-update
   - composer install
 
-script: phpunit Test.php
+script: phpunit
 
 notifications:
   email: friendsofsymfony-dev@googlegroups.com
