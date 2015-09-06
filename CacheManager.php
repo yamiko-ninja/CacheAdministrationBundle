@@ -24,17 +24,17 @@ class CacheManager
     private $cacheDir;
 
     /**
-     * @param $app_root string path to application root directory
-     * @param $environment string current environment
+     * @param string $appRoot path to application root directory
+     * @param string $environment current environment
      */
-    public function __construct($app_root, $environment)
+    public function __construct($appRoot, $environment)
     {
-        if (!is_dir($app_root)) {
-            throw new FileNotFoundException(null, 0, null, $app_root);
+        if (!is_dir($appRoot)) {
+            throw new FileNotFoundException(null, 0, null, $appRoot);
         }
-        $this->appRoot = $app_root;
+        $this->appRoot = $appRoot;
         $this->environment = $environment;
-        $this->cacheDir = $app_root.'/'.$environment;
+        $this->cacheDir = $appRoot.'/'.$environment;
         $this->filesystm = new Filesystem();
     }
 
