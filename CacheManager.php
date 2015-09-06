@@ -24,7 +24,7 @@ class CacheManager
     private $cacheDir;
 
     /**
-     * @param string $appRoot path to application root directory
+     * @param string $appRoot     path to application root directory
      * @param string $environment current environment
      */
     public function __construct($appRoot, $environment)
