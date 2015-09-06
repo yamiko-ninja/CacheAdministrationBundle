@@ -8,6 +8,9 @@
             "email": "rparker@yamiko.ninja"
         }
     ],
+    "autoload": {
+        "psr-4": { "Yamiko\\CacheAdministrationBundle\\": ""}
+    },
     "require": {
     },
     "require-dev": {
