@@ -173,7 +173,15 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearContainer()
     {
-
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
+        $this->cache_manager->clearContainer();
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
     }
 
     /**
@@ -182,7 +190,15 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearRouting()
     {
-
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
+        $this->cache_manager->clearRouting();
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
     }
 
     /**
@@ -191,7 +207,13 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearClasses()
     {
-
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.map'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php.meta'));
+        $this->cache_manager->clearClasses();
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.map'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php.meta'));
     }
 
     /**
@@ -200,7 +222,11 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearTemplates()
     {
-
+        $this->assertTrue(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'twig'));
+        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'templates.php'));
+        $this->cache_manager->clearTemplates();
+        $this->assertFalse(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'twig'));
+        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'templates.php'));
     }
 
     /**
