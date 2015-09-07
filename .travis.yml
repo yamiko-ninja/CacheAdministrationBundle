@@ -23,3 +23,6 @@ before_script:
 script:
   - vendor/bin/phpcs --standard=Symfony2 --ignore=vendor/*,Tests/* ./
   - phpunit
+
+notifications:
+  - email: rparker@yamiko.ninja
