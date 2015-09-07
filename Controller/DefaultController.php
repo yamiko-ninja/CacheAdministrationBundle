@@ -33,27 +33,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * generates a flash message and redirects the user to the previous page or the home page
-     * @param Request $request
-     * @param string $cacheName
-     * @param bool|true $success
-     * @return RedirectResponse
-     */
-    protected function flashResponse(Request $request, $cacheName, $success = true)
-    {
-        $flashType = $success ? 'success' : 'alert';
-        $flashMessage = $success ? sprintf("Successfully removed %s cache(s)", $cacheName) : sprintf(
-            "Unable to remove %s cache",
-            $cacheName
-        );
-        $redirect = $request->headers->get('referer') ?: "/";
-
-        $this->session->getFlashBag()->add($flashType, $flashMessage);
-
-        return new RedirectResponse($redirect, 302);
-    }
-
-    /**
      * clears annotations cache
      * @param Request $request
      * @return RedirectResponse
@@ -171,5 +150,26 @@ class DefaultController extends Controller
         $this->cacheManager->clearAll();
 
         return $this->flashResponse($request, 'all', true);
+    }
+
+    /**
+     * generates a flash message and redirects the user to the previous page or the home page
+     * @param Request $request
+     * @param string $cacheName
+     * @param bool|true $success
+     * @return RedirectResponse
+     */
+    protected function flashResponse(Request $request, $cacheName, $success = true)
+    {
+        $flashType = $success ? 'success' : 'alert';
+        $flashMessage = $success ? sprintf("Successfully removed %s cache(s)", $cacheName) : sprintf(
+            "Unable to remove %s cache",
+            $cacheName
+        );
+        $redirect = $request->headers->get('referer') ?: "/";
+
+        $this->session->getFlashBag()->add($flashType, $flashMessage);
+
+        return new RedirectResponse($redirect, 302);
     }
 }
