@@ -14,27 +14,18 @@ class CacheManager
     /** @var Filesystem */
     private $filesystm;
 
-    /** @var  string path to app root directory */
-    private $appRoot;
-
-    /** @var string current environment */
-    private $environment;
-
     /** @var string path to cache directory */
     private $cacheDir;
 
     /**
-     * @param string $appRoot     path to application root directory
-     * @param string $environment current environment
+     * @param string $cacheDir path to application root directory
      */
-    public function __construct($appRoot, $environment)
+    public function __construct($cacheDir)
     {
-        if (!is_dir($appRoot)) {
-            throw new FileNotFoundException(null, 0, null, $appRoot);
+        if (!is_dir($cacheDir)) {
+            throw new FileNotFoundException(null, 0, null, $cacheDir);
         }
-        $this->appRoot = $appRoot;
-        $this->environment = $environment;
-        $this->cacheDir = $appRoot.'/'.$environment;
+        $this->cacheDir = $cacheDir;
         $this->filesystm = new Filesystem();
     }
 
@@ -85,7 +76,7 @@ class CacheManager
     {
         $finder = new Finder();
         $finder->name('*ProjectContainer*');
-        $this->filesystm->remove($finder->in($this->cacheDir.'/'));
+        $this->filesystm->remove($finder->in($this->cacheDir.DIRECTORY_SEPARATOR));
     }
 
     /**

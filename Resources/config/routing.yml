@@ -1,3 +1,39 @@
-yamiko_cache_administration_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: YamikoCacheAdministrationBundle:Default:index }
+yamiko_cache_administration_annotation:
+    path:     /cache/clear/annotations
+    defaults: { _controller: yamiko_cache_administration.controller:annotationsAction }
+
+yamiko_cache_administration_assetic:
+    path:     /cache/clear/assetic
+    defaults: { _controller: yamiko_cache_administration.controller:asseticAction }
+
+yamiko_cache_administration_doctrine:
+    path:     /cache/clear/doctrine
+    defaults: { _controller: yamiko_cache_administration.controller:doctrineAction }
+
+yamiko_cache_administration_translations:
+    path:     /cache/clear/translations
+    defaults: { _controller: yamiko_cache_administration.controller:translationsAction }
+
+yamiko_cache_administration_profiles:
+    path:     /cache/clear/profiles
+    defaults: { _controller: yamiko_cache_administration.controller:profilesAction }
+
+yamiko_cache_administration_container:
+    path:     /cache/clear/container
+    defaults: { _controller: yamiko_cache_administration.controller:containerAction }
+
+yamiko_cache_administration_routing:
+    path:     /cache/clear/routing
+    defaults: { _controller: yamiko_cache_administration.controller:routingAction }
+
+yamiko_cache_administration_classes:
+    path:     /cache/clear/classes
+    defaults: { _controller: yamiko_cache_administration.controller:classesAction }
+
+yamiko_cache_administration_templates:
+    path:     /cache/clear/templates
+    defaults: { _controller: yamiko_cache_administration.controller:templatesAction }
+
+yamiko_cache_administration_all:
+    path:     /cache/clear/all
+    defaults: { _controller: yamiko_cache_administration.controller:allAction }

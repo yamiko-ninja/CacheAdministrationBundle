@@ -17,10 +17,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
     protected $cache_manager;
 
     /** @var string test app root */
-    private $appRoot = 'app';
-
-    /** @var string test enviroment */
-    private $enviroment = 'test';
+    private $cacheDir = 'app/test';
 
     /** @var array dirs used in test */
     private $dirs = array(
@@ -53,25 +50,25 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (!is_dir($this->appRoot)) {
-            mkdir($this->appRoot);
+        if (!is_dir('app')) {
+            mkdir('app');
         }
-        if (!is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment)) {
-            mkdir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment);
+        if (!is_dir($this->cacheDir)) {
+            mkdir($this->cacheDir);
         }
 
         foreach ($this->dirs as $dir) {
-            if (!is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$dir)) {
-                mkdir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$dir);
+            if (!is_dir($this->cacheDir.DIRECTORY_SEPARATOR.$dir)) {
+                mkdir($this->cacheDir.DIRECTORY_SEPARATOR.$dir);
             }
         }
         foreach ($this->files as $file) {
-            if (!file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$file)) {
-                touch($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$file);
+            if (!file_exists($this->cacheDir.DIRECTORY_SEPARATOR.$file)) {
+                touch($this->cacheDir.DIRECTORY_SEPARATOR.$file);
             }
         }
 
-        $this->cache_manager = new CacheManager($this->appRoot, $this->enviroment);
+        $this->cache_manager = new CacheManager($this->cacheDir);
     }
 
     /**
@@ -80,21 +77,21 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         foreach ($this->dirs as $dir) {
-            if (is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$dir)) {
-                rmdir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$dir);
+            if (is_dir($this->cacheDir.DIRECTORY_SEPARATOR.$dir)) {
+                rmdir($this->cacheDir.DIRECTORY_SEPARATOR.$dir);
             }
         }
         foreach ($this->files as $file) {
-            if (file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$file)) {
-                unlink($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.$file);
+            if (file_exists($this->cacheDir.DIRECTORY_SEPARATOR.$file)) {
+                unlink($this->cacheDir.DIRECTORY_SEPARATOR.$file);
             }
         }
 
-        if (is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment)) {
-            rmdir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment);
+        if (is_dir($this->cacheDir)) {
+            rmdir($this->cacheDir);
         }
-        if (is_dir($this->appRoot)) {
-            rmdir($this->appRoot);
+        if (is_dir($this->cacheDir)) {
+            rmdir($this->cacheDir);
         }
     }
 
@@ -105,11 +102,11 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
     public function testClearAnnotations()
     {
         $this->assertTrue(
-            is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'annotations')
+            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'annotations')
         );
         $this->cache_manager->clearAnnotations();
         $this->assertFalse(
-            is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'annotations')
+            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'annotations')
         );
     }
 
@@ -120,9 +117,9 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearAssetic()
     {
-        $this->assertTrue(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'assetic'));
+        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'assetic'));
         $this->cache_manager->clearAssetic();
-        $this->assertFalse(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'assetic'));
+        $this->assertFalse(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'assetic'));
     }
 
     /**
@@ -131,10 +128,10 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearDoctrine()
     {
-        $this->assertTrue(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'doctrine'));
+        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'doctrine'));
         $this->cache_manager->clearDoctrine();
         $this->assertFalse(
-            is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'doctrine')
+            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'doctrine')
         );
     }
 
@@ -146,11 +143,11 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
     public function testClearTranslations()
     {
         $this->assertTrue(
-            is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'translations')
+            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'translations')
         );
         $this->cache_manager->clearTranslations();
         $this->assertFalse(
-            is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'translations')
+            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'translations')
         );
     }
 
@@ -160,10 +157,10 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearProfiles()
     {
-        $this->assertTrue(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'profiler'));
+        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'profiler'));
         $this->cache_manager->clearProfiles();
         $this->assertFalse(
-            is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'profiler')
+            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'profiler')
         );
     }
 
@@ -173,15 +170,15 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearContainer()
     {
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
         $this->cache_manager->clearContainer();
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
     }
 
     /**
@@ -190,15 +187,15 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearRouting()
     {
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
         $this->cache_manager->clearRouting();
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
     }
 
     /**
@@ -207,13 +204,13 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearClasses()
     {
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.map'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.map'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php.meta'));
         $this->cache_manager->clearClasses();
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.map'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'classes.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.map'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php.meta'));
     }
 
     /**
@@ -222,11 +219,11 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearTemplates()
     {
-        $this->assertTrue(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'twig'));
-        $this->assertTrue(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'templates.php'));
+        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'twig'));
+        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'templates.php'));
         $this->cache_manager->clearTemplates();
-        $this->assertFalse(is_dir($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'twig'));
-        $this->assertFalse(file_exists($this->appRoot.DIRECTORY_SEPARATOR.$this->enviroment.DIRECTORY_SEPARATOR.'templates.php'));
+        $this->assertFalse(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'twig'));
+        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'templates.php'));
     }
 
     /**
