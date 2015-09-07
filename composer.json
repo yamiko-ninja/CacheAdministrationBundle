@@ -1,7 +1,8 @@
 {
     "name": "yamiko/cache-administration-bundle",
-    "description": "Manage symfony caches",
+    "description": "Symfony bundle to manage caches",
     "license": "MIT",
+    "Version": "1.0.0-beta1",
     "authors": [
         {
             "name": "Robert M. Parker",
