@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Translation\DataCollectorTranslator;
 use Yamiko\CacheAdministrationBundle\CacheManager;
 
 /**
@@ -22,14 +23,18 @@ class DefaultController extends Controller
     /** @var Session */
     private $session;
 
+    /** @var DataCollectorTranslator */
+    private $trans;
+
     /**
      * @param CacheManager $cacheManager
      * @param Session      $session
      */
-    public function __construct(CacheManager $cacheManager, Session $session)
+    public function __construct(CacheManager $cacheManager, Session $session, DataCollectorTranslator $trans)
     {
         $this->cacheManager = $cacheManager;
         $this->session = $session;
+        $this->trans = $trans;
     }
 
     /**
@@ -41,7 +46,7 @@ class DefaultController extends Controller
     {
         $this->cacheManager->clearAnnotations();
 
-        return $this->flashResponse($request, 'annotations', true);
+        return $this->flashResponse($request, 'annotation', true);
     }
 
     /**
@@ -89,7 +94,7 @@ class DefaultController extends Controller
     {
         $this->cacheManager->clearProfiles();
 
-        return $this->flashResponse($request, 'profilers', true);
+        return $this->flashResponse($request, 'profiler', true);
     }
 
     /**
@@ -137,7 +142,7 @@ class DefaultController extends Controller
     {
         $this->cacheManager->clearTemplates();
 
-        return $this->flashResponse($request, 'templates', true);
+        return $this->flashResponse($request, 'template', true);
     }
 
     /**
@@ -154,21 +159,24 @@ class DefaultController extends Controller
 
     /**
      * generates a flash message and redirects the user to the previous page or the home page
-     * @param Request $request
-     * @param string $cacheName
+     * @param Request   $request
+     * @param string    $cacheName
      * @param bool|true $success
      * @return RedirectResponse
      */
     protected function flashResponse(Request $request, $cacheName, $success = true)
     {
-        $flashType = $success ? 'success' : 'alert';
-        $flashMessage = $success ? sprintf("Successfully removed %s cache(s)", $cacheName) : sprintf(
-            "Unable to remove %s cache",
-            $cacheName
-        );
-        $redirect = $request->headers->get('referer') ?: "/";
+        $flashType = $success ? $this->trans->trans('success') : $this->trans->trans('alert');
+        $transCacheName = $this->trans->trans($cacheName);
+
+        if ($success) {
+            $flashMessage = sprintf($this->trans->trans("Successfully removed %s cache(s)"), $transCacheName);
+        } else {
+            $flashMessage = sprintf($this->trans->trans("Unable to remove %s cache"), $transCacheName);
+        }
 
         $this->session->getFlashBag()->add($flashType, $flashMessage);
+        $redirect = $request->headers->get('referer') ?: "/";
 
         return new RedirectResponse($redirect, 302);
     }

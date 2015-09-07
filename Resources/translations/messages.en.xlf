@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>success</source>
+                <target>success</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>alert</source>
+                <target>alert</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>annotations</source>
+                <target>annotations</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>assetic</source>
+                <target>assetic</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>doctrine</source>
+                <target>doctrine</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>translations</source>
+                <target>translations</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>profiler</source>
+                <target>profiler</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>container</source>
+                <target>container</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>annotation</source>
+                <target>annotation</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>classes</source>
+                <target>classes</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>template</source>
+                <target>template</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>all</source>
+                <target>all</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Successfully removed %s cache(s)</source>
+                <target>Successfully removed %s cache(s)</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Unable to remove %s cache</source>
+                <target>Unable to remove %s cache</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
