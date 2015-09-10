@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yamiko\CacheAdministrationBundle\CacheManager;
 
 /**
@@ -23,15 +23,15 @@ class DefaultController extends Controller
     /** @var Session */
     private $session;
 
-    /** @var DataCollectorTranslator */
+    /** @var TranslatorInterface */
     private $trans;
 
     /**
      * @param CacheManager            $cacheManager
      * @param Session                 $session
-     * @param DataCollectorTranslator $trans
+     * @param TranslatorInterface     $trans
      */
-    public function __construct(CacheManager $cacheManager, Session $session, DataCollectorTranslator $trans)
+    public function __construct(CacheManager $cacheManager, Session $session, TranslatorInterface $trans)
     {
         $this->cacheManager = $cacheManager;
         $this->session = $session;
