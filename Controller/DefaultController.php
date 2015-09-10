@@ -27,8 +27,9 @@ class DefaultController extends Controller
     private $trans;
 
     /**
-     * @param CacheManager $cacheManager
-     * @param Session      $session
+     * @param CacheManager            $cacheManager
+     * @param Session                 $session
+     * @param DataCollectorTranslator $trans
      */
     public function __construct(CacheManager $cacheManager, Session $session, DataCollectorTranslator $trans)
     {
