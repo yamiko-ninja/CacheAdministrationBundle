@@ -23,6 +23,7 @@ class CacheManager
 
     /**
      * @param string $cacheDir path to application root directory
+     * @param Logger $logger log events
      */
     public function __construct($cacheDir, Logger $logger)
     {
