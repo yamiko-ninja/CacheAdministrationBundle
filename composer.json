@@ -2,7 +2,7 @@
     "name": "yamiko/cache-administration-bundle",
     "description": "Symfony bundle to manage caches",
     "license": "MIT",
-    "Version": "1.0.0-beta1",
+    "Version": "1.0.0-beta2",
     "authors": [
         {
             "name": "Robert M. Parker",
@@ -13,6 +13,9 @@
         "psr-4": { "Yamiko\\CacheAdministrationBundle\\": ""}
     },
     "require": {
+        "monolog/monolog": "^1.17",
+        "symfony/filesystem": "^2.7",
+        "symfony/finder": "^2.7"
     },
     "require-dev": {
         "phpunit/phpunit": "4.8.*"

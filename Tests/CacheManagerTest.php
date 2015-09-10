@@ -1,6 +1,8 @@
 <?php
 namespace Yamiko\CacheAdministrationBundle;
 
+use Monolog\Logger;
+use Monolog\LoggerTest;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -68,7 +70,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        $this->cache_manager = new CacheManager($this->cacheDir);
+        $this->cache_manager = new CacheManager($this->cacheDir, new Logger("yamiko_cache_administration_test"));
     }
 
     /**
