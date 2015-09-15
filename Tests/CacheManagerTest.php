@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Yamiko\CacheAdministrationBundle\CacheManager;
 
 /**
  * Class CacheManager
@@ -60,13 +61,13 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         }
 
         foreach ($this->dirs as $dir) {
-            if (!is_dir($this->cacheDir.DIRECTORY_SEPARATOR.$dir)) {
-                mkdir($this->cacheDir.DIRECTORY_SEPARATOR.$dir);
+            if (!is_dir($this->cacheDir . DIRECTORY_SEPARATOR . $dir)) {
+                mkdir($this->cacheDir . DIRECTORY_SEPARATOR . $dir);
             }
         }
         foreach ($this->files as $file) {
-            if (!file_exists($this->cacheDir.DIRECTORY_SEPARATOR.$file)) {
-                touch($this->cacheDir.DIRECTORY_SEPARATOR.$file);
+            if (!file_exists($this->cacheDir . DIRECTORY_SEPARATOR . $file)) {
+                touch($this->cacheDir . DIRECTORY_SEPARATOR . $file);
             }
         }
 
@@ -79,13 +80,13 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         foreach ($this->dirs as $dir) {
-            if (is_dir($this->cacheDir.DIRECTORY_SEPARATOR.$dir)) {
-                rmdir($this->cacheDir.DIRECTORY_SEPARATOR.$dir);
+            if (is_dir($this->cacheDir . DIRECTORY_SEPARATOR . $dir)) {
+                rmdir($this->cacheDir . DIRECTORY_SEPARATOR . $dir);
             }
         }
         foreach ($this->files as $file) {
-            if (file_exists($this->cacheDir.DIRECTORY_SEPARATOR.$file)) {
-                unlink($this->cacheDir.DIRECTORY_SEPARATOR.$file);
+            if (file_exists($this->cacheDir . DIRECTORY_SEPARATOR . $file)) {
+                unlink($this->cacheDir . DIRECTORY_SEPARATOR . $file);
             }
         }
 
@@ -99,147 +100,147 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * test annotation deletion
-     * @covers CacheManager::clearAnnotations
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearAnnotations
      */
     public function testClearAnnotations()
     {
         $this->assertTrue(
-            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'annotations')
+            is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'annotations')
         );
         $this->cache_manager->clearAnnotations();
         $this->assertFalse(
-            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'annotations')
+            is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'annotations')
         );
     }
 
 
     /**
      * test assetic deletion
-     * @covers CacheManager::clearAssetic
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearAssetic
      */
     public function testClearAssetic()
     {
-        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'assetic'));
+        $this->assertTrue(is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'assetic'));
         $this->cache_manager->clearAssetic();
-        $this->assertFalse(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'assetic'));
+        $this->assertFalse(is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'assetic'));
     }
 
     /**
      * test doctrine deletion
-     * @covers CacheManager::clearDoctrine
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearDoctrine
      */
     public function testClearDoctrine()
     {
-        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'doctrine'));
+        $this->assertTrue(is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'doctrine'));
         $this->cache_manager->clearDoctrine();
         $this->assertFalse(
-            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'doctrine')
+            is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'doctrine')
         );
     }
 
 
     /**
      * test translations deletion
-     * @covers CacheManager::clearTranslations
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearTranslations
      */
     public function testClearTranslations()
     {
         $this->assertTrue(
-            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'translations')
+            is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'translations')
         );
         $this->cache_manager->clearTranslations();
         $this->assertFalse(
-            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'translations')
+            is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'translations')
         );
     }
 
     /**
      * test profile deletion
-     * @covers CacheManager::clearProfiles
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearProfiles
      */
     public function testClearProfiles()
     {
-        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'profiler'));
+        $this->assertTrue(is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'profiler'));
         $this->cache_manager->clearProfiles();
         $this->assertFalse(
-            is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'profiler')
+            is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'profiler')
         );
     }
 
     /**
      * test Container deletion
-     * @covers CacheManager::clearContainer
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearContainer
      */
     public function testClearContainer()
     {
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainer.php'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainer.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainer.xml'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainerCompiler.log'));
         $this->cache_manager->clearContainer();
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.php.meta'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainer.xml'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appTestDebugProjectContainerCompiler.log'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainer.php'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainer.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainer.xml'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appTestDebugProjectContainerCompiler.log'));
     }
 
     /**
      * test routing deletion
-     * @covers CacheManager::clearRouting
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearRouting
      */
     public function testClearRouting()
     {
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlGenerator.php'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlGenerator.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlMatcher.php'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlMatcher.php.meta'));
         $this->cache_manager->clearRouting();
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlGenerator.php.meta'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'appDevUrlMatcher.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlGenerator.php'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlGenerator.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlMatcher.php'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'appDevUrlMatcher.php.meta'));
     }
 
     /**
      * test class deletion
-     * @covers CacheManager::clearClasses
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearClasses
      */
     public function testClearClasses()
     {
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.map'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php.meta'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'classes.map'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'classes.php'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'classes.php.meta'));
         $this->cache_manager->clearClasses();
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.map'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'classes.php.meta'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'classes.map'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'classes.php'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'classes.php.meta'));
     }
 
     /**
      * test template deletion
-     * @covers CacheManager::clearTemplate
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearTemplates
      */
     public function testClearTemplates()
     {
-        $this->assertTrue(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'twig'));
-        $this->assertTrue(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'templates.php'));
+        $this->assertTrue(is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'twig'));
+        $this->assertTrue(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'templates.php'));
         $this->cache_manager->clearTemplates();
-        $this->assertFalse(is_dir($this->cacheDir.DIRECTORY_SEPARATOR.'twig'));
-        $this->assertFalse(file_exists($this->cacheDir.DIRECTORY_SEPARATOR.'templates.php'));
+        $this->assertFalse(is_dir($this->cacheDir . DIRECTORY_SEPARATOR . 'twig'));
+        $this->assertFalse(file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'templates.php'));
     }
 
     /**
      * test all deletion
-     * @covers CacheManager::clearAll
+     * @covers \Yamiko\CacheAdministrationBundle\CacheManager::clearAll
      */
     public function clearAll()
     {
-        //$this->clearAnnotations();
-        //$this->clearAssetic();
-        //$this->clearContainer();
-        //$this->clearClasses();
-        //$this->clearDoctrine();
-        //$this->clearRouting();
-        //$this->clearTemplates();
+        $this->clearAnnotations();
+        $this->clearAssetic();
+        $this->clearContainer();
+        $this->clearClasses();
+        $this->clearDoctrine();
+        $this->clearRouting();
+        $this->clearTemplates();
     }
 }
