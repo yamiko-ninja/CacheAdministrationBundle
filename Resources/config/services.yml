@@ -4,6 +4,7 @@ services:
     arguments: [ "%kernel.cache_dir%", "@logger" ]
     tags:
       - { name: monolog.logger, channel: yamiko_cache_administration }
+
   yamiko_cache_administration.controller:
     class: Yamiko\CacheAdministrationBundle\Controller\DefaultController
     arguments: [ "@yamiko_cache_administration.cache_manager", "@session", "@translator" ]
