@@ -17,12 +17,17 @@ before_script:
   - composer self-update
   - composer require --dev escapestudios/symfony2-coding-standard:~2.0
   - composer require fabpot/php-cs-fixer
+  - composer.phar install --dev --no-interaction
   - composer install
   - vendor/bin/phpcs --config-set installed_paths vendor/escapestudios/symfony2-coding-standard
 
 script:
   - vendor/bin/phpcs --standard=Symfony2 --ignore=vendor/*,Tests/* ./
-  - phpunit
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+ - php vendor/bin/coveralls -v
 
 notifications:
   - email: rparker@yamiko.ninja

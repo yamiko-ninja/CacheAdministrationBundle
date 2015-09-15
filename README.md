@@ -1,7 +1,9 @@
 [![Build Status](https://travis-ci.org/yamiko-ninja/CacheAdministrationBundle.svg?branch=master)](https://travis-ci.org/yamiko-ninja/CacheAdministrationBundle)
 [![Latest Stable Version](https://poser.pugx.org/yamiko/cache-administration-bundle/v/stable)](https://packagist.org/packages/yamiko/cache-administration-bundle)
-[![Total Downloads](https://poser.pugx.org/yamiko/cache-administration-bundle/downloads)](https://packagist.org/packages/yamiko/cache-administration-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/yamiko/cache-administration-bundle/v/unstable)](https://packagist.org/packages/yamiko/cache-administration-bundle) [![License](https://poser.pugx.org/yamiko/cache-administration-bundle/license)](https://packagist.org/packages/yamiko/cache-administration-bundle)
+[![Dependency Status](https://www.versioneye.com/php/yamiko:cache-administration-bundle/dev-master/badge.svg)](https://www.versioneye.com/php/yamiko:cache-administration-bundle/dev-master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a550adbb-4903-465a-adb4-8ced77dc49a5/mini.png)](https://insight.sensiolabs.com/projects/a550adbb-4903-465a-adb4-8ced77dc49a5)
+[![Total Downloads](https://poser.pugx.org/yamiko/cache-administration-bundle/downloads)](https://packagist.org/packages/yamiko/cache-administration-bundle)
 
 Installation
 ============
